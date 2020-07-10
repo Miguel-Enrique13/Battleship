@@ -30,17 +30,17 @@ class Cell
   end
 
   def render(display_ship = false)
-    if empty? == true && @fire == false || empty? == false && @fire == false
-      if display_ship == true
-        "S"
-      else
+    if !fired_upon?
+      if empty? || (!empty? && !display_ship)
         "."
+      else
+        "S"
       end
-    elsif empty? == true && @fire == true
+    elsif empty?
       "M"
-    elsif empty? == false && @fire == true && @ship.sunk? == false
+    elsif !empty? && !@ship.sunk?
       "H"
-    elsif empty? == false && @fire == true && @ship.sunk? == true
+    elsif !empty? && @ship.sunk?
       "X"
     end
   end
